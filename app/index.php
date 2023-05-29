@@ -14,7 +14,6 @@ require_once "config.php";
 // Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
-$user_found = FALSE;
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -36,28 +35,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT * FROM admin_users; # WHERE user_name = $username";
+        $sql = "SELECT * FROM admin_users WHERE user_name='$username'";
 
         if ($result = $record_management_system_db_conn->query($sql)) {
             while ($data = $result->fetch_object()) {
                 $users[] = $data;
             }
         }
-        
-        foreach ($users as $user) {
-            if ($username == $user->user_name) {
-                echo "User found";
-                $user_found = TRUE;
-                if (md5($password) == $user->password_hash){
-                    echo "Passowrd is matched";
-                }
-                else {
-                    $login_err = "Invalid password.";
+
+        if (!isset($users) || empty($users)) {
+            $login_err = "Invalid username.";
+        }
+        else {
+            echo "User is found in the DB.";
+            foreach ($users as $user) {
+                if ($username == $user->user_name) {
+                    if (md5($password) == $user->password_hash){
+                        echo "Passowrd is matched";
+                    }
+                    else {
+                        $login_err = "Invalid password.";
+                    }
                 }
             }
-        }
-        if (! $user_found) {
-            $login_err = "Invalid username.";
         }
                                     // Store data in session variables
                                     //$_SESSION["loggedin"] = true;
@@ -80,15 +80,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
+        <h2 class="login_text">Login</h2>
+        <p class="please_fill_text">Please fill in your credentials to login.</p>
 
         <?php 
         if(!empty($login_err)){
@@ -108,7 +105,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
+                <div class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-primary" value="Login">
+                </div>
             </div>
         </form>
     </div>
