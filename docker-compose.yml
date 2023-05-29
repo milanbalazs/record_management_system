@@ -4,15 +4,24 @@ services:
     ports:
       - "80:80"
     build: './build/php'
+    networks:
+      - db_net
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - ./app:/var/www/html
+  # Example for MySQL docker-compose:
+  #   https://medium.com/@chrischuck35/how-to-create-a-mysql-instance-with-docker-compose-1598f3cc1bee
   mysql:
-    ports:
-      - "3306:3306"
+    # ports:
+    #   - "3306:3306"
     build: './build/mysql'
+    networks:
+      - db_net
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      # MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     # volumes:
@@ -22,5 +31,7 @@ volumes:
   app:
   dbData:
 
+networks:
+  db_net: {}
 
 
