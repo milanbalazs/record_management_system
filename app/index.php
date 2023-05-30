@@ -1,6 +1,9 @@
 <?php
+
 // Include common PHP file
 require_once "common.php";
+// Include config PHP file
+require_once "config.php";
 
 // redirect("login.php");
 
@@ -29,30 +32,40 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['login_btn'])) {
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">ID</th>
+            <th scope="col">Type</th>
+            <th scope="col">Fuel</th>
+            <th scope="col">Year</th>
+            <th scope="col">Seats</th>
+            <th scope="col">Price</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            </tr>
-            <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            </tr>
-            <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            </tr>
+            <?php
+            $counter = 1;
+            $cars = [];
+
+            // Prepare a select statement
+            $sql = "SELECT * FROM cars";
+
+            if ($result = $record_management_system_db_conn->query($sql)) {
+                while ($data = $result->fetch_object()) {
+                    $cars[] = $data;
+                }
+            foreach ($cars as $car) {
+                echo "<tr>";
+                echo '<th scope="row">' . $counter . '</th>';
+                echo "<td>" . $car->car_id . "</td>";
+                echo "<td>" . $car->car_type . "</td>";
+                echo "<td>" . $car->car_fuel . "</td>";
+                echo "<td>" . $car->car_year . "</td>";
+                echo "<td>" . $car->car_seats . "</td>";
+                echo "<td>" . $car->car_price . "</td>";
+                echo" </tr>";
+                $counter += 1;
+            }
+            }
+            ?>
         </tbody>
     </table>
 </body>
