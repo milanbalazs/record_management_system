@@ -16,13 +16,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout_btn'])) {
     redirect("logout.php");
 }
 
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['delete_btn'])) {
+    $sql = "DELETE FROM cars WHERE car_id='" . $_POST['action_value'] . "'";
+    if ($record_management_system_db_conn->query($sql) === TRUE) {
+        // Refresh the page.
+        header("Refresh:0");
+    }
+    else {
+        echo "Error deleting record: " . $record_management_system_db_conn->error;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>RMS</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="index.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -65,6 +76,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout_btn'])) {
             <th scope="col">Year</th>
             <th scope="col">Seats</th>
             <th scope="col">Price</th>
+            <?php
+            if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+                echo '<th scope="col">Actions</th>';
+            }
+            ?>
             </tr>
         </thead>
         <tbody>
@@ -73,9 +89,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout_btn'])) {
             $cars = [];
 
             // Prepare a select statement
-            $sql = "SELECT * FROM cars";
+            $get_cars_sql = "SELECT * FROM cars";
 
-            if ($result = $record_management_system_db_conn->query($sql)) {
+            if ($result = $record_management_system_db_conn->query($get_cars_sql)) {
                 while ($data = $result->fetch_object()) {
                     $cars[] = $data;
                 }
@@ -88,6 +104,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout_btn'])) {
                 echo "<td>" . $car->car_year . "</td>";
                 echo "<td>" . $car->car_seats . "</td>";
                 echo "<td>" . $car->car_price . "</td>";
+                if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+                    echo '<form class="form-inline" action="index.php" method="post">';
+                    echo '<input type="submit" class="btn btn-success" name="addn_btn" value=Add />';
+                    echo '<td>';
+                    echo '<input type="submit" class="btn btn-danger" name="delete_btn" value=Delete />';
+                    echo '<input type="submit" class="btn btn-warning" name="modify_btn" value=Modify />';
+                    echo '<input type="hidden" name="action_value" value=' . $car->car_id . '>';
+                    echo '</td>';
+                    echo '</form>';
+
+                }
                 echo" </tr>";
                 $counter += 1;
             }

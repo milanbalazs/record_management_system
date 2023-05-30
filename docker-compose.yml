@@ -17,6 +17,7 @@ services:
     # ports:
     #   - "3306:3306"
     build: './build/mysql'
+    restart: always
     networks:
       - db_net
     environment:
