@@ -29,6 +29,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout_btn'])) {
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
+    <ul class="navbar-nav abs-center-x">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Record Management System</a>
+        </li>
+    </ul>
+
     <form class="form-inline" action="index.php" method="post">     
         <?php
             // Check if the user is already logged in, if yes then redirect him to index page
