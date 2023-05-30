@@ -5,10 +5,15 @@ require_once "common.php";
 // Include config PHP file
 require_once "config.php";
 
-// redirect("login.php");
+// Initialize the session
+session_start();
 
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['login_btn'])) {
     redirect("login.php");
+}
+
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout_btn'])) {
+    redirect("logout.php");
 }
 
 ?>
@@ -24,9 +29,25 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['login_btn'])) {
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
-    <form class="form-inline" action="index.php" method="post">
-        <input class="btn btn-success my-2 my-sm-0" type="submit" name="login_btn" value="Login" />
+    <form class="form-inline" action="index.php" method="post">     
+        <?php
+            // Check if the user is already logged in, if yes then redirect him to index page
+            if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+                echo '<input class="btn btn-danger my-2 my-sm-0" type="submit" name="logout_btn" value="Logout" />';
+            }
+            else {
+                echo '<input class="btn btn-success my-2 my-sm-0" type="submit" name="login_btn" value="Login" />';
+            }
+        ?>
     </form>
+    <?php
+        // Check if the user is already logged in, if yes then redirect him to index page
+        if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+            echo '<span class="navbar-text">';
+            echo 'Hello ' . $_SESSION["user_name"] . '!';
+            echo '</span>';
+        }
+    ?>
     </nav>
     <table class="table table-dark">
         <thead>

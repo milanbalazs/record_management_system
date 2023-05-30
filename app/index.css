@@ -1,3 +1,10 @@
 body {
-    background-color: #f2fcf5;
+    background-color: #819c92;
+}
+
+.navbar-text {
+    /* The !important is needed to overwrite the default theme */ 
+    font-size: 24px !important;
+    font-weight: bold !important;
+    color: rgb(189, 255, 233) !important;
 }

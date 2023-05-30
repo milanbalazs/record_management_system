@@ -30,6 +30,6 @@ CREATE TABLE IF NOT EXISTS `cars` (
 );
 
 INSERT INTO `cars` (`car_type`, `car_fuel`, `car_year`, `car_seats`, `car_price`)
-    SELECT 'test_type', 'test_fuel', '1990-12-12', 5, 15000 -- init_admin_password (MD5)
+    SELECT 'test_type', 'test_fuel', '1990-12-12', 5, 15000
     FROM dual
     WHERE NOT EXISTS (SELECT * FROM `cars`);

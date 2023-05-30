@@ -49,11 +49,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $login_err = "Invalid username.";
         }
         else {
-            echo "User is found in the DB.";
+            // echo "User is found in the DB.";
             foreach ($users as $user) {
                 if ($username == $user->user_name) {
                     if (md5($password) == $user->password_hash){
-                        echo "Passowrd is matched";
+                        // echo "Passowrd is matched";
+                        // Store data in session variables
+                        $_SESSION["loggedin"] = true;
+                        $_SESSION["user_name"] = $username;
+                        redirect("index.php"); 
                     }
                     else {
                         $login_err = "Invalid password.";
@@ -61,11 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 }
             }
         }
-                                    // Store data in session variables
-                                    //$_SESSION["loggedin"] = true;
-                                    //$_SESSION["user_id"] = $user_id;
-                                    //$_SESSION["user_name"] = $username; 
-                                    //$login_err = "Invalid username or password.";
+                                    
         
                     // Username doesn't exist, display a generic error message
                     // $login_err = "Invalid username or password.";
