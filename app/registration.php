@@ -64,22 +64,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['save_btn'])){
         if (md5($password) != md5($second_password)) {
             $registration_err = "The password and re-password don't match!";
         }
+        
         else{
-            // Prepare an insert statement
-            $sql = "INSERT INTO admin_users (user_name, first_name, last_name, password_hash, approved) VALUES";
-            $sql .= " ('" . $username . "',";
-            $sql .= " '" . $first_name . "',";
-            $sql .= " '" . $last_name . "',";
-            $sql .= " '" . md5($password) . "',";
-            $sql .= " '" . 0 . "')";
 
-            if ($record_management_system_db_conn->query($sql) === TRUE) {
-                // Redirect to index page.
-                redirect("index.php");
+            // Prepare a select statement
+            $get_user_sql = "SELECT * FROM admin_users WHERE user_name='$username'";
+
+            if ($result = $record_management_system_db_conn->query($get_user_sql)) {
+                while ($data = $result->fetch_object()) {
+                    $users[] = $data;
+                }
+            }
+
+            if (isset($users) && !empty($users)) {
+                $registration_err = "The selected Username is taken!";
             }
             else {
-                echo "Error create user: " . $record_management_system_db_conn->error;
-                $registration_err = "Error create user: " . $record_management_system_db_conn->error;
+                // Prepare an insert statement
+                $sql = "INSERT INTO admin_users (user_name, first_name, last_name, password_hash, approved) VALUES";
+                $sql .= " ('" . $username . "',";
+                $sql .= " '" . $first_name . "',";
+                $sql .= " '" . $last_name . "',";
+                $sql .= " '" . md5($password) . "',";
+                $sql .= " '" . 0 . "')";
+
+                if ($record_management_system_db_conn->query($sql) === TRUE) {
+                    // Redirect to index page.
+                    redirect("index.php");
+                }
+                else {
+                    echo "Error create user: " . $record_management_system_db_conn->error;
+                    $registration_err = "Error create user: " . $record_management_system_db_conn->error;
+                }
             }
         }
     }
