@@ -20,7 +20,7 @@ $car_seats = $car_price = "0";
 $car_year = date('Y-m-d');
 $modify_action = FALSE;
 
-// Redirect back to index.php in case of Cancel button pressing.
+//Run in case of Save button pressing (Modify case).
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['mod_save_btn'])) {
 
     // Prepare an update statement
@@ -39,6 +39,27 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['mod_save_btn'])) {
     else {
         echo "Error updating record: " . $record_management_system_db_conn->error;
         $login_err = "Error updating record: " . $record_management_system_db_conn->error;
+    }
+}
+
+//Run in case of Save button pressing (Add case).
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['add_save_btn'])) {
+
+    // Prepare an update statement
+    $sql = "INSERT INTO cars (car_type, car_fuel, car_seats, car_year, car_price) VALUES";
+    $sql .= " ('" . $_POST['type'] . "',";
+    $sql .= " '" . $_POST['fuel'] . "',";
+    $sql .= " '" . $_POST['seats'] . "',";
+    $sql .= " '" . $_POST['year'] . "',";
+    $sql .= " '" . $_POST['price'] . "')";
+
+    if ($record_management_system_db_conn->query($sql) === TRUE) {
+        // Redirect to index page.
+        redirect("index.php");
+    }
+    else {
+        echo "Error add record: " . $record_management_system_db_conn->error;
+        $login_err = "Error add record: " . $record_management_system_db_conn->error;
     }
 }
 
@@ -128,7 +149,7 @@ if(isset($_GET['record_id'])){
                             echo '<input type="hidden" name="action_value" value=' . $record_id . '>';
                         }
                         else{
-                            echo '<input type="submit" class="btn btn-success" name="save_btn" value="Save">';
+                            echo '<input type="submit" class="btn btn-success" name="add_save_btn" value="Save">';
                         }
                     ?>
                     <input type="submit" class="btn btn-danger" name="cancel_btn" value="Cancel">
