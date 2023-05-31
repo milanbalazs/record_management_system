@@ -27,6 +27,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['delete_btn'])) {
     }
 }
 
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['add_btn'])) {
+    redirect("add_modify.php");
+}
+
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['modify_btn'])) {
+    header("Location:add_modify.php?record_id=" . $_POST['action_value']);
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -50,10 +59,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['delete_btn'])) {
         <?php
             // Check if the user is already logged in, if yes then redirect him to index page
             if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-                echo '<input class="btn btn-danger my-2 my-sm-0" type="submit" name="logout_btn" value="Logout" />';
+                echo '<input class="btn btn-danger" type="submit" name="logout_btn" value="Logout">';
+                echo '<input class="btn btn-success" type="submit" name="add_btn" value="Add">';
             }
             else {
-                echo '<input class="btn btn-success my-2 my-sm-0" type="submit" name="login_btn" value="Login" />';
+                echo '<input class="btn btn-success my-2 my-sm-0" type="submit" name="login_btn" value="Login">';
             }
         ?>
     </form>
@@ -106,10 +116,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['delete_btn'])) {
                 echo "<td>" . $car->car_price . "</td>";
                 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
                     echo '<form class="form-inline" action="index.php" method="post">';
-                    echo '<input type="submit" class="btn btn-success" name="addn_btn" value=Add />';
                     echo '<td>';
-                    echo '<input type="submit" class="btn btn-danger" name="delete_btn" value=Delete />';
-                    echo '<input type="submit" class="btn btn-warning" name="modify_btn" value=Modify />';
+                    echo '<input type="submit" class="btn btn-danger" name="delete_btn" value=Delete>';
+                    echo '<input type="submit" class="btn btn-warning" name="modify_btn" value=Modify>';
                     echo '<input type="hidden" name="action_value" value=' . $car->car_id . '>';
                     echo '</td>';
                     echo '</form>';
