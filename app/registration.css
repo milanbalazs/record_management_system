@@ -1,0 +1,20 @@
+body {
+    font: 14px sans-serif;
+    background-color: #f2fcf5;
+}
+
+h2.registration_text, p.please_fill_text {
+    text-align: center;
+}
+
+.please_fill_text_important {
+    text-align: center;
+    color: red;
+}
+
+.wrapper {
+    width: 360px;
+    padding: 20px;
+    margin-left:auto;
+    margin-right:auto;
+}

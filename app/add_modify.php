@@ -137,7 +137,12 @@ if(isset($_GET['record_id'])){
                             $fuel_options = array_merge($fuel_options);
                         }
                         else{
-                            echo '<option selected>Choose...</option>';
+                            echo '<option selected>Diesel</option>';
+                            foreach (array_keys($fuel_options, 'Diesel', true) as $key) {
+                                unset($fuel_options[$key]);
+                            }
+                            // The below array merge is needed due to reset the indexes in the array (Empty option in the selector)
+                            $fuel_options = array_merge($fuel_options);
                         }
                         for($i = 0;$i < count($fuel_options);$i++)
                         echo '<option value="' . $fuel_options[$i] . '">' . $fuel_options[$i] . '</option>';

@@ -12,8 +12,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['login_btn'])) {
     redirect("login.php");
 }
 
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['reg_btn'])) {
+    redirect("registration.php");
+}
+
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['logout_btn'])) {
     redirect("logout.php");
+}
+
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['apr_btn'])) {
+    redirect("approve.php");
 }
 
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['delete_btn'])) {
@@ -57,18 +65,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['modify_btn'])) {
 
     <form class="form-inline" action="index.php" method="post">     
         <?php
-            // Check if the user is already logged in, if yes then redirect him to index page
+            // Check if the user is already logged in, if yes then create the following buttons
             if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
                 echo '<input class="btn btn-danger" type="submit" name="logout_btn" value="Logout">';
                 echo '<input class="btn btn-success" type="submit" name="add_btn" value="Add">';
+                echo '<input class="btn btn-info" type="submit" name="apr_btn" value="Approvals">';
             }
             else {
                 echo '<input class="btn btn-success my-2 my-sm-0" type="submit" name="login_btn" value="Login">';
+                echo '<input class="btn btn-info my-2 my-sm-0" type="submit" name="reg_btn" value="Registration">';
             }
         ?>
     </form>
     <?php
-        // Check if the user is already logged in, if yes then redirect him to index page
+        // Check if the user is already logged in, if yes then wite the hello mwssage to nav bar
         if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
             echo '<span class="navbar-text">';
             echo 'Hello ' . $_SESSION["user_name"] . '!';
@@ -76,7 +86,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['modify_btn'])) {
         }
     ?>
     </nav>
-    <table class="table table-dark">
+    <table class="table table-dark table-hover">
         <thead>
             <tr>
             <th scope="col">#</th>
