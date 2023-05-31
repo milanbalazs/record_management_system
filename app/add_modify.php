@@ -121,10 +121,28 @@ if(isset($_GET['record_id'])){
                 <input type="text" name="type" class="form-control" value="<?php echo $car_type;?>">
                 <span class="invalid-feedback"><?php echo "Invalid Type"; ?></span>
             </div>    
-            <div class="form-group">
-                <label>Fuel</label>
-                <input type="text" name="fuel" class="form-control" value="<?php echo $car_fuel;?>">
-                <span class="invalid-feedback"><?php echo "Invalid Fuel"; ?></span>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Fuel</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name="fuel">
+                    <?php
+                        $fuel_options = array('Petrol', 'Diesel', 'LPG', 'Electric');
+                        if($modify_action === TRUE){
+                            echo '<option selected>' . $car_fuel . '</option>';
+                            foreach (array_keys($fuel_options, $car_fuel, true) as $key) {
+                                unset($fuel_options[$key]);
+                            }
+                            // The below array merge is needed due to reset the indexes in the array (Empty option in the selector)
+                            $fuel_options = array_merge($fuel_options);
+                        }
+                        else{
+                            echo '<option selected>Choose...</option>';
+                        }
+                        for($i = 0;$i < count($fuel_options);$i++)
+                        echo '<option value="' . $fuel_options[$i] . '">' . $fuel_options[$i] . '</option>';
+                    ?>
+                </select>
             </div>
             <div class="form-group">
                 <label>Year</label>
