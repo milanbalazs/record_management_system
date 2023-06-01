@@ -17,8 +17,12 @@ require_once "config.php";
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
 
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['user_cancel_btn'])) {
+    redirect("index.php");
+}
+
 // Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['user_login_btn'])){
  
     // Check if username is empty
     if(empty(trim($_POST["username"]))){
@@ -107,7 +111,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group">
                 <div class="d-flex justify-content-center">
-                    <input type="submit" class="btn btn-primary" value="Login">
+                    <input type="submit" class="btn btn-success" name="user_login_btn", value="Login">
+                    <input type="submit" class="btn btn-danger" name="user_cancel_btn" value="Cancel">
                 </div>
             </div>
         </form>

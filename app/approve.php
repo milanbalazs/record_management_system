@@ -25,6 +25,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['user_approve_btn'])) {
     }
 }
 
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['user_delete_btn'])) {
+    // Prepare a delete statement
+    $sql = "DELETE FROM admin_users WHERE user_id='" . $_POST['action_value'] . "'";    
+    if ($record_management_system_db_conn->query($sql) === TRUE) {
+        // Refresh the page.
+        header("Refresh:0");
+    }
+    else {
+        echo "Error updating record: " . $record_management_system_db_conn->error;
+        $login_err = "Error updating record: " . $record_management_system_db_conn->error;
+    }
+}
+
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['back_index_btn'])) {
     redirect("index.php");
 }
