@@ -197,7 +197,9 @@ Enter to the MySQL container:
 
 ## Automatic test
 
-The PHP Composer is added as GitHub workflow so the tests can be run in case of new commit in the repository.
+The `PHP Composer` can be added as `GitHub Workflow` and it can be run for each commit:
+
+- https://github.com/php-actions/composer
 
 ## Improvement opporunities
 
