@@ -84,6 +84,7 @@ You can deploy the application smply to call the following command:
 
 ## Software structure
 
+``` bash
 ├── app (Application files. Eg.: PHP, CSS, etc..)
 │   ├── add_modify.css
 │   ├── ...
@@ -102,6 +103,7 @@ You can deploy the application smply to call the following command:
 │   ├── ...
 │   └── ...
 └── README.md (The documentation itself)
+```
 
 ## App - `PHP`
 
