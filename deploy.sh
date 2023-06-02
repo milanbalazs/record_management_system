@@ -9,6 +9,13 @@ if [[ $(which docker) && $(docker --version) ]]; then
     exit 1
 fi
 
+if [[ $(which docker-compose) && $(docker-compose --version) ]]; then
+    echo "Docker-compose is avilable on the host"
+  else
+    echo "[ERROR] - Docker-compose is not available on the Host. Please intall it (https://docs.docker.com/compose/install/)." 1>&2
+    exit 1
+fi
+
 source "${DIR_OF_SCRIPT}/environment_config.sh" || { echo "[ERROR] - Cannot source the ${DIR_OF_SCRIPT}/environment_config.sh script." 1>&2; exit 1; }
 
 # "--remove-orphans" can be added to remove the not used containers --detach --remove-orphans

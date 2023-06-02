@@ -30,6 +30,9 @@ In this section you can read the requirements from different aspects.
 
 The application is runnin in separated `Docker containers` so only the Docker/Docker-compose has to be installed to the PC.
 
+The availability of `Docker` and `docker-compose` are tested in the deployment script (`deploy.sh`) and it one of them if not
+available the script will thorw an error (with hint to install the package) and exit immediately.
+
 **Official Docker installation documentation:**
 
 - <https://docs.docker.com/engine/install/>
