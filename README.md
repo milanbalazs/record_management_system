@@ -85,24 +85,24 @@ You can deploy the application smply to call the following command:
 ## Software structure
 
 ``` bash
-├── app (Application files. Eg.: PHP, CSS, etc..)
+├── app  --  (Application files. Eg.: PHP, CSS, etc..)
 │   ├── add_modify.css
 │   ├── ...
 │   ├── ...
-├── build (The build related stuff)
-│   ├── mysql (MySQL build studd)
-│   │   ├── Dockerfile (Dockerfile of MySQL)
-│   │   └── init.sql (The script which runs in start-up phase)
-│   └── php (PHP build related stuff)
-│       └── Dockerfile (Dockerfile of PHP)
-├── deploy.sh (This script can be used for deployment)
-├── docker-compose.yml (The docker-compose file of Application)
-├── environment_config.sh (Configuration file of the application)
-├── imgs (The images for documentation)
+├── build  --  (The build related stuff)
+│   ├── mysql  --  (MySQL build studd)
+│   │   ├── Dockerfile  --  (Dockerfile of MySQL)
+│   │   └── init.sql  --  (The script which runs during start-up phase)
+│   └── php  --  (PHP build related stuff)
+│       └── Dockerfile  --  (Dockerfile of PHP)
+├── deploy.sh  --  (This script can be used to deploy the service)
+├── docker-compose.yml  --  (The docker-compose file of Application)
+├── environment_config.sh  --  (Configuration file of the application)
+├── imgs  --  (The images for documentation)
 │   ├── admin_users_er_diagram.png
 │   ├── ...
 │   └── ...
-└── README.md (The documentation itself)
+└── README.md  --  (The documentation itself)
 ```
 
 ## App - `PHP`
