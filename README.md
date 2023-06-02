@@ -195,6 +195,10 @@ Enter to the MySQL container:
 - The HTTPS protocol can be done with [letsencrypt](https://letsencrypt.org/). You can do it on your host with [certbot](https://certbot.eff.org/)
 - The MySQLi (currently used) or PDO usage can protect the SQL injection ([Reference](https://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php))
 
+## Automatic test
+
+The PHP Composer is added as GitHub workflow so the tests can be run in case of new commit in the repository.
+
 ## Improvement opporunities
 
 - Use object orientated PHP
