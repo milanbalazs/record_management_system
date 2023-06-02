@@ -11,7 +11,7 @@ In this section you can read the requirements from different aspects.
 - Users should be able to browse the available cars
 - Users shouldn't be able to modify/add/delete the records (cars)
 - Users don't have profile and log-in is not needed to browse the cars
-- Users can registrate as Admin the the request has to be approved by another Admin user
+- Users can registrate as Admin the request has to be approved by another Admin user
 
 ### Administrator requirements
 
@@ -32,11 +32,11 @@ The application is runnin in separated `Docker containers` so only the Docker/Do
 
 **Official Docker installation documentation:**
 
-- https://docs.docker.com/engine/install/
+- <https://docs.docker.com/engine/install/>
 
 **Official Docker-compose installation documentation:**
 
-- https://docs.docker.com/compose/install/
+- <https://docs.docker.com/compose/install/>
 
 ## Configuration
 
@@ -61,7 +61,7 @@ The deployment is automatized and it can be done to run the `deploy.sh` scipt fr
 
 **Reference of docker-compose:**
 
-- https://docs.docker.com/compose/compose-file/
+- <https://docs.docker.com/compose/compose-file/>
 
 You can deploy the application smply to call the following command:
 
@@ -130,7 +130,7 @@ The application uses custom `Docker Image` which can be found:
 
 - [build/mysql/Dockerfile](build/mysql/Dockerfile)
 
-The own `Docker Image` is useful because we won't reach the pull-rase limit in the official `Docker Registry`. Furthermore we can change/extend/modify the original `Docker Image`.
+The own `Docker Image` is useful because we won't reach the pull-rase limit in the official `Docker Registry`. Furthermore, we can change/extend/modify the original `Docker Image`.
 
 ### Create the init state of `MySQL` DB
 
@@ -173,9 +173,9 @@ The own `Docker Image` is useful because we won't reach the pull-rase limit in t
 
 The script is able to handle if the databases or tables are available (persistent volume is set for `Docker Service`) so it creates them only in case if they are not available.
 
-The above `SQL` script is copied to the `MySQL Docker image` to the `/docker-entrypoint-initdb.d` folder. In this folder the `*.sql` and `*.sh` script are ran automatically by MySQL in the start-up phase.
+The above `SQL` script is copied to the `MySQL Docker image` to the `/docker-entrypoint-initdb.d` folder. In this folder the `*.sql` and `*.sh` script are run automatically by MySQL in the start-up phase.
 
-It means in the first usage you can use the above admin user credentials (I highly recommend to change the password of it after first usage.).
+It means in the first usage you can use the above admin user credentials (I highly recommend to changeing the password of it after first usage.).
 
 ### Init state verification
 
@@ -199,9 +199,9 @@ Enter to the MySQL container:
 
 The `PHP Composer` can be added as `GitHub Workflow` and it can be run for each commit:
 
-- https://github.com/php-actions/composer
+- <https://github.com/php-actions/composer>
 
-## Improvement opporunities
+## Improvement opportunities
 
 - Use object orientated PHP
 - Rewrite the file structure (different folders fow views)
