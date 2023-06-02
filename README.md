@@ -98,7 +98,7 @@ You can deploy the application smply to call the following command:
 ├── deploy.sh  --  (This script can be used to deploy the service)
 ├── docker-compose.yml  --  (The docker-compose file of Application)
 ├── environment_config.sh  --  (Configuration file of the application)
-├── imgs  --  (The images for documentation)
+├── imgs  --  (The documentation images)
 │   ├── admin_users_er_diagram.png
 │   ├── ...
 │   └── ...
