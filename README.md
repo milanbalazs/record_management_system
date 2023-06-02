@@ -4,7 +4,7 @@ It's a Management System of car shop. The users can browse the available cars an
 
 ## Requirements
 
-In this section you can read the requirements based on the permissions levels.
+In this section you can read the requirements from different aspects.
 
 ### User requirements
 
@@ -19,6 +19,12 @@ In this section you can read the requirements based on the permissions levels.
 - Admins should be able to log-in to the application
 - Admins should be able to approve/delete the registration requests
 - Admins should be able to modify/add/delete the records (cars)
+
+### Technical requirements
+
+- Mandatory technologies
+  - PHP, MySQL
+- Store the log-in data in `Session` variable
 
 ## Prerequisites
 
@@ -57,7 +63,11 @@ The deployment is automatized and it can be done to run the `deploy.sh` scipt fr
 
 - https://docs.docker.com/compose/compose-file/
 
-## Tested Environment:
+You can deploy the application smply to call the following command:
+
+- `./deploy.sh`
+
+## Tested Environment
 
 **Operation System:**
 
@@ -72,9 +82,43 @@ The deployment is automatized and it can be done to run the `deploy.sh` scipt fr
 
 - 1.29.1
 
+## Software structure
+
+├── app (Application files. Eg.: PHP, CSS, etc..)
+│   ├── add_modify.css
+│   ├── ...
+│   ├── ...
+├── build (The build related stuff)
+│   ├── mysql (MySQL build studd)
+│   │   ├── Dockerfile (Dockerfile of MySQL)
+│   │   └── init.sql (The script which runs in start-up phase)
+│   └── php (PHP build related stuff)
+│       └── Dockerfile (Dockerfile of PHP)
+├── deploy.sh (This script can be used for deployment)
+├── docker-compose.yml (The docker-compose file of Application)
+├── environment_config.sh (Configuration file of the application)
+├── imgs (The images for documentation)
+│   ├── admin_users_er_diagram.png
+│   ├── ...
+│   └── ...
+└── README.md (The documentation itself)
+
 ## App - `PHP`
 
-## `MySQL`
+**The used `PHP` base `Docker Image`:**
+
+- [php:8.1-apache](https://hub.docker.com/layers/library/php/8.1-apache/images/sha256-1890a914d868d701e51b70f2a1b3b482162875d560b44290e2511f05f2cb2b13)
+
+This image contains Debian's Apache httpd in conjunction with PHP (as `mod_php`) and uses `mpm_prefork` by default. It means, there is no need another Proxy service like `NgInx`.
+
+**Additional extensions (In `Dockerfile`):**
+
+- [docker-php-ext-install](https://github.com/mlocati/docker-php-extension-installer) - Script that can be used to easily install a PHP extension inside the official PHP Docker images.
+- [mysqli](https://www.php.net/manual/en/book.mysqli.php) - The MySQLi functions allows you to access MySQL database servers.
+- [pdo](https://www.php.net/manual/en/book.pdo.php) - PHP Data Objects.
+- [pdo_mysql](https://www.php.net/manual/en/ref.pdo-mysql.php) - A driver that implements the PHP Data Objects (PDO) interface to enable access from PHP to MySQL databases.
+
+## DataBase - `MySQL`
 
 **The used `MySQL` base `Docker Image`:**
 
@@ -144,4 +188,5 @@ Enter to the MySQL container:
 ## Security stuff
 
 - There is no open port for `MySQL` service. It's accissable only inside the `Docker network`.
-- Only 80 port is open for `PHP` service.
+- Only one (8000, but it's configurable in `docker-compose.yml`) port is open for `PHP` service.
+- There is not execution of request (To avoid the attacks or SQL injection)
