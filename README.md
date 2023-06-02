@@ -189,4 +189,43 @@ Enter to the MySQL container:
 
 - There is no open port for `MySQL` service. It's accissable only inside the `Docker network`.
 - Only one (8000, but it's configurable in `docker-compose.yml`) port is open for `PHP` service.
-- There is not execution of request (To avoid the attacks or SQL injection)
+- There is not execution of request (To avoid the attacks or SQL injection).
+- The HTTPS protocol can be done with [letsencrypt](https://letsencrypt.org/). You can do it on your host with [certbot](https://certbot.eff.org/)
+- The MySQLi (currently used) or PDO usage can protect the SQL injection ([Reference](https://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php))
+
+## Improvement opporunities
+
+- Use object orientated PHP
+- Rewrite the file structure (different folders fow views)
+- Use common CSS (Avoid the duplications)
+- Add test cases (UnitTest, FunctionTest, E2E test)
+
+## Pictures about the application
+
+### Home page (before log-in [User view])
+
+![User Home Page](imgs/user_home_page.png)
+
+### Home page (after log-in [Admin view])
+
+![UsAdminer Home Page](imgs/admin_home_page.png)
+
+### Login page - Available all users
+
+![Login Page](imgs/login_page.png)
+
+### Registration page - Available all users
+
+![Registration Page](imgs/registration_page.png)
+
+### Add Page - Available only for authenticated Admin users
+
+![Add Page](imgs/add_page.png)
+
+### Modify Page - Available only for authenticated Admin users
+
+![Modify Page](imgs/modify_page.png)
+
+### Approve Page - Available only for authenticated Admin users
+
+![Approve Page](imgs/approve_page.png)
