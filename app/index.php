@@ -78,7 +78,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['modify_btn'])) {
         ?>
     </form>
     <?php
-        // Check if the user is already logged in, if yes then wite the hello mwssage to nav bar
+        // Check if the user is already logged in, if yes then write the hello message to nav bar
         if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
             echo '<span class="navbar-text">';
             echo 'Hello ' . $_SESSION["user_name"] . '!';

@@ -3,16 +3,16 @@
 DIR_OF_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 
 if [[ $(which docker) && $(docker --version) ]]; then
-    echo "Docker is avilable on the host"
+    echo "Docker is available on the host"
   else
-    echo "[ERROR] - Docker is not available on the Host. Please intall it (https://docs.docker.com/engine/install/)." 1>&2
+    echo "[ERROR] - Docker is not available on the Host. Please install it (https://docs.docker.com/engine/install/)." 1>&2
     exit 1
 fi
 
 if [[ $(which docker-compose) && $(docker-compose --version) ]]; then
-    echo "Docker-compose is avilable on the host"
+    echo "Docker-compose is available on the host"
   else
-    echo "[ERROR] - Docker-compose is not available on the Host. Please intall it (https://docs.docker.com/compose/install/)." 1>&2
+    echo "[ERROR] - Docker-compose is not available on the Host. Please install it (https://docs.docker.com/compose/install/)." 1>&2
     exit 1
 fi
 

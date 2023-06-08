@@ -61,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['user_login_btn'])){
                     }
                     else {
                         if (md5($password) == $user->password_hash){
-                            // echo "Passowrd is matched";
+                            // echo "Password is matched";
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["user_name"] = $username;
