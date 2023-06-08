@@ -4,6 +4,8 @@
 # /composer.lock
 /fuel/vendor
 
+.idea/
+
 # the fuelphp document
 /docs/
 
